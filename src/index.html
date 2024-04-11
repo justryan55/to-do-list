@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Get It Done</title>
+</head>
+<body>
+    <div id="root">
+        <div id="container-main">
+            <div class="navigation">
+                <span class="material-symbols-outlined" id="home">home</span>
+                <span class="material-symbols-outlined" id="task-alt">task_alt</span>
+                <span class="material-symbols-outlined" id="help">help</span>
+            </div>
+            <div class="left-project-view">
+                <div class="left-internal-area" id="sort">
+                    <div class="section">
+                        <button class="btn" id="today-btn"><span class="material-symbols-outlined" id="calendar-today">
+                            calendar_today</span>Today</button>    
+                    </div>
+                    <div class="section">
+                        <button class="btn" id="week-btn"><span class="material-symbols-outlined" id="calender-range">
+                            date_range</span>Next 7 Days</button>
+                    </div>
+                    <div class="section">
+                        <button class="btn" id="inbox-btn"><span class="material-symbols-outlined" id="inbox">
+                            inbox</span>Inbox</button>    
+                    </div>
+                </div>
+                <div class="section-break"></div>
+                <div class="projects-section">
+                    <div class="left-internal-area" id="projects-id">Projects<button id="add-project">+</button></div>
+                    <div class="dynamically-created-projects"></div>
+                </div>
+            </div>
+            <div class="center-list-view">
+                <div class="center-section" id="header"></div>
+                <div class="center-section" id="input-section">
+                    <label for="task-item"></label>
+                    <input type="text" id="task-item" name="task-item" placeholder="    Add task" required>
+                </div>
+                <div class="center-section" id="display-items-in-project-section"></div>
+            </div>
+            <div class="right-description-view"></div>
+        </div>
+    </div>
+</body>
+</html>
