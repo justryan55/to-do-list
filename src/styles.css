@@ -98,4 +98,33 @@
     font-size: 35px;
 }
 
+.new-project-button {
+    font-size: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
 
+.new-project-button:hover {
+    font-size: 20px;
+    background-color: lightgreen;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.input-field {
+    margin: 5px;
+}
+
+.dynamically-created-projects {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-header {
+    margin: 25px;
+    font-size: 35px;
+}
