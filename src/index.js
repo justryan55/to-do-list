@@ -4,7 +4,28 @@ const addProjectBtn = document.getElementById('add-project');
 const projectInputField = document.getElementById('project-input');
 const projectList = document.querySelector('.dynamically-created-projects');
 const header = document.getElementById("header");
+const toDoSection = document.querySelector("display-items-of-project");
+const toDoInputField = document.getElementById("task-item");
 const projects = [];
+
+class Project{
+    constructor(name){
+        this.name = name;
+        this.storedItems = [];
+    }
+
+    renameHeaderToProject(){
+        header.innerText = this.name;
+    }
+
+    storeItemsInArray(item){
+        this.storedItems.push(item);
+    }
+
+    displayText(){
+        console.log("Test");
+    }
+}
 
 function addEventListeners(){
     addProjectBtn.addEventListener("click", toggleInputField);
@@ -33,30 +54,12 @@ function appendNewProjectToDOM(projectName, projectObject){
     }
 
     projects.push(projectObject);
-    const newDiv = document.createElement('button');
-    newDiv.classList.add("new-project-button");
-    newDiv.innerText = projectName;    
-    projectList.insertBefore(newDiv, projectList.firstChild);
+    const newProjectDiv = document.createElement('button');
+    newProjectDiv.classList.add("new-project-button");
+    newProjectDiv.innerText = projectName;    
+    projectList.insertBefore(newProjectDiv, projectList.firstChild);
     projectInputField.value = "";
 }
 
-class Project{
-    constructor(name){
-        this.name = name;
-        this.storedItems = [];
-    }
 
-    renameHeaderToProject(){
-        header.innerText = this.name;
-    }
-
-    storeItemsInArray(item){
-        this.storedItems.push(item);
-    }
-
-    displayText(){
-        console.log("Test");
-    }
-}
-
-addEventListeners()
+addEventListeners();
