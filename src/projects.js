@@ -8,4 +8,25 @@ export default class Project {
     storeProject(){
         projects.push(this.name);
     }
+
+    addProjectNameToHeader(){
+
+    }
+
 }
+
+
+
+const project = new Project('Movies'); 
+project.storeProject();
+project.addProjectNameToHeader();
+
+
+
+console.log(project);
+
+const project2 = new Project('Cats'); 
+project2.storeProject();
+
+console.log(project2);
+
