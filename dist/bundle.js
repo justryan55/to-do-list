@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+eval("throw new Error(\"Module parse failed: Unexpected token (24:4)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n|         this.name = name,\\n|         this.description = description,\\n>     }\\n| \\n|     sayHi(){\");\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
 
 /***/ })
 
@@ -24,7 +24,7 @@ eval("\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module doesn't tell about it's top-level declarations so it can't be inlined
 /******/ 	var __webpack_exports__ = {};
 /******/ 	__webpack_modules__["./src/index.js"]();
 /******/ 	
