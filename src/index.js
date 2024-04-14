@@ -12,27 +12,21 @@ class Project{
     constructor(name){
         this.name = name;
         this.storedItems = [];
+        this.toDoInputField = document.getElementById("task-item");
+        this.toDoSection = document.getElementById("display-items-of-project");
+        this.header = document.getElementById("header");
     }
 
     renameHeaderToProject(){
-        header.innerText = this.name;
+        this.header.innerText = this.name;
     }
 
-    storeItemsInProject(){
-        const toDoItem = toDoInputField.value;
-        toDoInputField.addEventListener("keypress", (event) => {
-            if (event.key === "Enter"){
-                this.storedItems.push(toDoItem);
-                toDoInputField.value = "";
-                console.log(this.storedItems)
-            }
-        })
-        // displayToDoItemsInProject(toDoItem);
-    }
-
-    displayToDoItemsInProject(toDoItem){
+    displayToDoItems(){
+        this.toDoSection.innerHTML = "";
         this.storedItems.forEach((item) => {
-            toDoSection.innerText = item;
+            const toDoItemElement = document.createElement("div");
+            toDoItemElement.innerText = item;
+            this.toDoSection.appendChild(toDoItemElement);
         })
     }
 }
@@ -56,6 +50,7 @@ function createProject(){
     const nameOfProject = projectInputField.value;
     const newProjectObject = new Project(nameOfProject);
     appendNewProjectToDOM(nameOfProject, newProjectObject);
+    setupProjectEventListeners(newProjectObject);
 }
 
 function appendNewProjectToDOM(projectName, projectObject){
@@ -72,15 +67,31 @@ function appendNewProjectToDOM(projectName, projectObject){
     callRenameHeaderMethodOfProject(newProjectDiv, projectObject);
 }
 
-function callRenameHeaderMethodOfProject(newProjectDiv, newProjectObject){
-    newProjectDiv.addEventListener("click", () => {
-        newProjectObject.renameHeaderToProject();
-        callstoreItemsInProjectMethodOfProject(newProjectDiv, newProjectObject);
+function setupProjectEventListeners(newProjectObject){
+    newProjectObject.toDoInputField.addEventListener("keypress", (event) => {
+        if (event.key === "Enter"){
+            if (newProjectObject.toDoInputField.value === ""){
+                return
+            } else {
+                const toDoItem = newProjectObject.toDoInputField.value;
+                newProjectObject.storedItems.push(toDoItem);
+                newProjectObject.toDoInputField.value = "";
+                newProjectObject.displayToDoItems();
+                console.log(newProjectObject.storedItems);    
+            }
+        }
     })
 }
 
-function callstoreItemsInProjectMethodOfProject(newProjectDiv, newProjectObject){
-    newProjectObject.storeItemsInProject();
+function callRenameHeaderMethodOfProject(newProjectDiv, newProjectObject){
+    newProjectDiv.addEventListener("click", () => {
+        newProjectObject.renameHeaderToProject();
+        // callstoreItemsInProjectMethodOfProject(newProjectDiv, newProjectObject);
+    })
 }
+
+// function callstoreItemsInProjectMethodOfProject(newProjectDiv, newProjectObject){
+//     newProjectObject.storeItemsInProject();
+// }
 
 addEventListeners();
