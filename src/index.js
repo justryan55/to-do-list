@@ -24,7 +24,8 @@ class Project{
     displayToDoItems(){
         this.toDoSection.innerHTML = "";
         this.storedItems.forEach((item) => {
-            const toDoItemElement = document.createElement("div");
+            const toDoItemElement = document.createElement("li");
+            toDoItemElement.classList.add("to-do-item");
             toDoItemElement.innerText = item;
             this.toDoSection.appendChild(toDoItemElement);
         })
