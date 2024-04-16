@@ -22,7 +22,7 @@ class TodoList {
 
         this.currentProjectIndex = this.projects.length - 1;
 
-        this.render(project);
+        this.render();
     }
     
     bindEvents() {
@@ -58,7 +58,7 @@ class TodoList {
 
     }
 
-    render(project) {
+    render() {
         const currentProject = this.projects[this.currentProjectIndex];
 
         if(!currentProject) {
@@ -87,7 +87,6 @@ class TodoList {
 
         this.$toDoSection.innerHTML = "";
         currentProject.storedItems.forEach(item => {
-            this.project.renderTodo();
             const $toDoItemElement = document.createElement("li");
             $toDoItemElement.classList.add("to-do-item");
             $toDoItemElement.innerText = item;
