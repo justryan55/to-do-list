@@ -22,7 +22,7 @@ class TodoList {
 
         this.currentProjectIndex = this.projects.length - 1;
 
-        this.render();
+        this.render(project);
     }
     
     bindEvents() {
@@ -58,7 +58,7 @@ class TodoList {
 
     }
 
-    render() {
+    render(project) {
         const currentProject = this.projects[this.currentProjectIndex];
 
         if(!currentProject) {
@@ -87,6 +87,7 @@ class TodoList {
 
         this.$toDoSection.innerHTML = "";
         currentProject.storedItems.forEach(item => {
+            this.project.renderTodo();
             const $toDoItemElement = document.createElement("li");
             $toDoItemElement.classList.add("to-do-item");
             $toDoItemElement.innerText = item;
@@ -99,7 +100,25 @@ class Project{
     constructor(name){
         this.name = name;
         this.storedItems = [];
+        this.description = [];
+        this.todoItemName = document.getElementById('todo-item-name');
+        this.renderTodo()
+    }
+
+    renderTodo(){
+        console.log("Test");
     }
 }
+
+
+
+
+
+
+// const $toDoItemElement = document.createElement("li");
+// $toDoItemElement.classList.add("to-do-item");
+// $toDoItemElement.innerText = item;
+// this.$toDoSection.append($toDoItemElement);
+
 
 const todoList = new TodoList();
