@@ -116,6 +116,14 @@
     cursor: pointer;
 }
 
+.project-current {
+    font-size: 20px;
+    background-color: rgb(116, 207, 116);
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
 .dynamically-created-projects {
     display: flex;
     flex-direction: column;
