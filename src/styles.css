@@ -24,7 +24,7 @@
 
 .left-project-view {
     display: grid;
-    grid-template-rows: 150px 2px auto;
+    grid-template-rows: 100px 2px auto;
 }
 
 #sort {
@@ -69,7 +69,7 @@
 
 .center-list-view {
     display: grid;
-    grid-auto-rows: 75px 75px minmax(200px, auto);
+    grid-auto-rows: 100px 5px 75px minmax(200px, auto);
 }
 
 #input-section {
@@ -144,7 +144,7 @@
 #header {
     display: flex;
     padding-left: 20px;
-    padding-top: 40px;
+    padding-top: 30px;
     font-size: 40px;
 }
 
@@ -156,3 +156,34 @@ li {
     cursor: pointer;
 }
 
+.reminder-section {
+    padding-top: 70px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+#todo-item-name {
+    padding-left: 20px;
+    padding-top: 70px;
+}
+
+#description-input {
+    height: 35px;
+    border: none;
+    background-color: #f1f0f0;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+
+#right-input-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.todo-item-description {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 100px;
+}
