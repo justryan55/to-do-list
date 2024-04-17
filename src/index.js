@@ -4,6 +4,7 @@ class TodoList {
     constructor() {
         this.projects = [];
         this.currentProjectIndex = null;
+        this.currentTodoIndex = null;
         this.$projectNameInput = document.getElementById('project-input');
         this.$header = document.getElementById("header");
         this.$projectList = document.querySelector('.dynamically-created-projects');
@@ -29,8 +30,7 @@ class TodoList {
         const currentProject = this.projects[this.currentProjectIndex];
         currentProject.storedItems.push(todoItem);
         this.$toDoInputField.value = "";
-
-        this.render();
+        this.render(todoItem);
     }
     
     bindEvents() {
@@ -63,7 +63,7 @@ class TodoList {
 
     }
 
-    render() {
+    render(todoItem) {
         const currentProject = this.projects[this.currentProjectIndex];
 
         if(this.projects.length === 0){
@@ -87,7 +87,8 @@ class TodoList {
 
             $newProject.addEventListener('click', () => {
                 this.currentProjectIndex = this.projects.indexOf(project);
-                console.log(currentTodo)
+                this.render();
+
             });
 
             this.$projectList.append($newProject);
@@ -97,8 +98,8 @@ class TodoList {
 
 
 
-        const currentTodoIndex = currentProject.storedItems.length - 1;
-        const currentTodo = currentProject.storedItems[currentTodoIndex];
+        this.currentTodoIndex = currentProject.storedItems.length - 1;
+        const currentTodo = currentProject.storedItems[this.currentTodoIndex];
 
         this.$toDoSection.innerHTML = "";
         currentProject.storedItems.forEach(item => {
@@ -107,8 +108,10 @@ class TodoList {
             $toDoItemElement.innerText = item.name;
 
             $toDoItemElement.addEventListener("click", () => {
-                console.log(currentTodoIndex);
-                console.log(currentTodo);
+                this.currentTodoIndex = currentProject.storedItems.indexOf(todoItem);
+                console.log(todoItem)
+                this.render();
+
             })
 
             this.$toDoSection.append($toDoItemElement);
