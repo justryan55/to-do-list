@@ -11,6 +11,7 @@ class TodoList {
         this.$toDoInputField = document.getElementById("task-item");
         this.$toDoSection = document.getElementById("display-items-of-project");
         this.$projectInputToggleButton = document.getElementById('add-project');
+        this.$todoItemName = document.getElementById('todo-item-name');
 
         this.bindEvents();
         this.render();
@@ -30,7 +31,7 @@ class TodoList {
         const currentProject = this.projects[this.currentProjectIndex];
         currentProject.storedItems.push(todoItem);
         this.$toDoInputField.value = "";
-        this.render(todoItem);
+        this.render();
     }
     
     bindEvents() {
@@ -63,7 +64,7 @@ class TodoList {
 
     }
 
-    render(todoItem) {
+    render() {
         const currentProject = this.projects[this.currentProjectIndex];
 
         if(this.projects.length === 0){
@@ -76,7 +77,7 @@ class TodoList {
         
         this.$projectList.innerHTML = "";
 
-        this.projects.forEach(project => {
+        this.projects.forEach((project, i) => {
             const $newProject = document.createElement('button');
             $newProject.classList.add("new-project-button");
             $newProject.innerText = project.name;
@@ -86,7 +87,7 @@ class TodoList {
             }
 
             $newProject.addEventListener('click', () => {
-                this.currentProjectIndex = this.projects.indexOf(project);
+                this.currentProjectIndex = i;
                 this.render();
 
             });
@@ -95,29 +96,27 @@ class TodoList {
         });
 
         this.$header.innerHTML = currentProject.name;
-
-
-
-        this.currentTodoIndex = currentProject.storedItems.length - 1;
-        const currentTodo = currentProject.storedItems[this.currentTodoIndex];
-
         this.$toDoSection.innerHTML = "";
-        currentProject.storedItems.forEach(item => {
+
+        currentProject.storedItems.forEach((item, j) => {
             const $toDoItemElement = document.createElement("li");
             $toDoItemElement.classList.add("to-do-item");
             $toDoItemElement.innerText = item.name;
 
             $toDoItemElement.addEventListener("click", () => {
-                this.currentTodoIndex = currentProject.storedItems.indexOf(todoItem);
-                console.log(todoItem)
+                this.currentTodoIndex = j;
                 this.render();
 
             })
 
             this.$toDoSection.append($toDoItemElement);
         });
-
-
+        
+            if (this.currentTodoIndex !== null){
+                this.$todoItemName.innerHTML = currentProject.storedItems[this.currentTodoIndex].name;
+            }
+        
+        
     }
 }
 
@@ -133,7 +132,6 @@ class Todo{
     constructor(name){
         this.name = name;
         this.description = [];
-        this.$todoItemName = document.getElementById('todo-item-name');
     }
 }
 
