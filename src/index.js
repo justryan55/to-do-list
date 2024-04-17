@@ -26,11 +26,11 @@ class TodoList {
     
     createTodo(){
         const todoItem = new Todo(this.$toDoInputField.value);
-
-        const project = this.projects[this.currentProjectIndex];
-        project.storedItems.push(todoItem);
-        todoItem.render(project.storedItems);
+        const currentProject = this.projects[this.currentProjectIndex];
+        currentProject.storedItems.push(todoItem);
         this.$toDoInputField.value = "";
+
+        this.render();
     }
     
     bindEvents() {
@@ -75,6 +75,7 @@ class TodoList {
         }
         
         this.$projectList.innerHTML = "";
+
         this.projects.forEach(project => {
             const $newProject = document.createElement('button');
             $newProject.classList.add("new-project-button");
@@ -86,7 +87,7 @@ class TodoList {
 
             $newProject.addEventListener('click', () => {
                 this.currentProjectIndex = this.projects.indexOf(project);
-                this.render();
+                console.log(currentTodo)
             });
 
             this.$projectList.append($newProject);
@@ -94,13 +95,26 @@ class TodoList {
 
         this.$header.innerHTML = currentProject.name;
 
+
+
+        const currentTodoIndex = currentProject.storedItems.length - 1;
+        const currentTodo = currentProject.storedItems[currentTodoIndex];
+
         this.$toDoSection.innerHTML = "";
         currentProject.storedItems.forEach(item => {
             const $toDoItemElement = document.createElement("li");
             $toDoItemElement.classList.add("to-do-item");
             $toDoItemElement.innerText = item.name;
+
+            $toDoItemElement.addEventListener("click", () => {
+                console.log(currentTodoIndex);
+                console.log(currentTodo);
+            })
+
             this.$toDoSection.append($toDoItemElement);
         });
+
+
     }
 }
 
@@ -118,31 +132,15 @@ class Todo{
         this.description = [];
         this.$todoItemName = document.getElementById('todo-item-name');
     }
-
-    render(todoItem){
-        const currentTodoIndex = todoItem.length - 1;
-        const currentTodo = todoItem[currentTodoIndex];
-        this.$todoItemName.innerText = currentTodo.name;
-        this.bindTodoEvents(currentTodo);
-    }
-
-    bindTodoEvents(currentTodo){
-        // console.log(currentTodo)
-        // currentTodo.addEventListener("click", () => {
-        //     console.log("Test")
-        // })
-    }
 }
 
 
 
 
-
-
-// const $toDoItemElement = document.createElement("li");
-// $toDoItemElement.classList.add("to-do-item");
-// $toDoItemElement.innerText = item;
-// this.$toDoSection.append($toDoItemElement);
-
-
 const todoList = new TodoList();
+
+
+// render(todoItem){
+//     const currentTodoIndex = todoItem.length - 1;
+//     const currentTodo = todoItem[currentTodoIndex];
+//     this.$todoItemName.innerText = currentTodo.name;
