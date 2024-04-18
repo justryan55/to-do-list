@@ -12,6 +12,8 @@ class TodoList {
         this.$toDoSection = document.getElementById("display-items-of-project");
         this.$projectInputToggleButton = document.getElementById('add-project');
         this.$todoItemName = document.getElementById('todo-item-name');
+        this.$descriptionInput = document.getElementById('description-input');
+        this.$descriptionSection = document.getElementById('description');
 
         this.bindEvents();
         this.render();
@@ -25,7 +27,7 @@ class TodoList {
 
         this.render();
     }
-    
+
     createTodo(){
         const todoItem = new Todo(this.$toDoInputField.value);
         const currentProject = this.projects[this.currentProjectIndex];
@@ -33,7 +35,7 @@ class TodoList {
         this.$toDoInputField.value = "";
         this.render();
     }
-    
+
     bindEvents() {
         this.$projectInputToggleButton.addEventListener("click", () => {
             this.$projectNameInput.classList.toggle("hidden");
@@ -61,6 +63,13 @@ class TodoList {
 
             
         });
+
+        this.$descriptionInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter"){
+                this.render();
+                // this.$descriptionInput.value = "";
+            }
+        })
 
     }
 
@@ -106,18 +115,51 @@ class TodoList {
             $toDoItemElement.addEventListener("click", () => {
                 this.currentTodoIndex = j;
                 this.render();
-
             })
 
             this.$toDoSection.append($toDoItemElement);
         });
         
-            if (this.currentTodoIndex !== null){
+        if (this.currentTodoIndex !== null){
                 this.$todoItemName.innerHTML = currentProject.storedItems[this.currentTodoIndex].name;
+        }
+
+        if (this.currentTodoIndex !== null){
+            currentProject.storedItems.forEach((item, x) => {
+                const $descriptionElement = document.createElement("p");
+                const currentDescriptionValue = this.$descriptionInput.value;
+
+                $descriptionElement.innerText = currentDescriptionValue;
+                const a = currentProject.storedItems[this.currentTodoIndex].description.push(currentDescriptionValue);
+                // const currentTodo = currentProject.storedItems[this.currentTodoIndex];
+                // currentTodo.description = currentDescriptionValue;
+
+                $descriptionElement.addEventListener("click", () => {
+                    this.render();
+                })
+
+
+                this.$descriptionInput.value = "";
+    
+                this.$descriptionSection.append($descriptionElement);
+
+            });
+
+
             }
-        
-        
+
+            // currentProject.storedItems[this.currentTodoIndex].forEach((item, x) => {
+            //     const $descriptionElement = document.createElement("p");
+            //     $descriptionElement.innerText = item.description;
+
+            //     $descriptionElement.addEventListener("click", () => {
+            //         this.descriptionIndex = x;
+            //         console.log(x)
+            //         this.render();
+            //     })
+            // })
     }
+
 }
 
 class Project{
@@ -145,3 +187,14 @@ const todoList = new TodoList();
 //     const currentTodoIndex = todoItem.length - 1;
 //     const currentTodo = todoItem[currentTodoIndex];
 //     this.$todoItemName.innerText = currentTodo.name;
+
+// createDescription(j){
+//     this.$descriptionInput.value = "";
+//     this.currentTodoIndex = j;
+//     const descriptionInput = this.$descriptionInput.value;
+//     const currentProject = this.projects[this.currentProjectIndex];
+//     const currentTodo = currentProject.storedItems[this.currentTodoIndex];
+//     console.log(currentTodo);
+//     currentTodo.description.push(descriptionInput);
+//     console.log(currentTodo.description)
+// }
