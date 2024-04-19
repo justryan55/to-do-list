@@ -36,6 +36,14 @@ class TodoList {
         this.render();
     }
 
+    createDescription(description){
+        const currentProject = this.projects[this.currentProjectIndex];
+        const currentTodo = currentProject.storedItems[this.currentTodoIndex];
+        currentTodo.description = description;
+        this.render();
+        console.log(currentTodo.description)
+    }
+
     bindEvents() {
         this.$projectInputToggleButton.addEventListener("click", () => {
             this.$projectNameInput.classList.toggle("hidden");
@@ -65,9 +73,9 @@ class TodoList {
         });
 
         this.$descriptionInput.addEventListener("keypress", (event) => {
-            if (event.key === "Enter"){
-                this.render();
-                // this.$descriptionInput.value = "";
+            if (event.key === "Enter" && this.$descriptionInput.value){
+                this.createDescription(this.$descriptionInput.value);
+                this.$descriptionInput.value = "";
             }
         })
 
@@ -120,45 +128,12 @@ class TodoList {
             this.$toDoSection.append($toDoItemElement);
         });
         
-        if (this.currentTodoIndex !== null){
+        if (this.currentTodoIndex !== null && currentProject.storedItems[this.currentTodoIndex]){
                 this.$todoItemName.innerHTML = currentProject.storedItems[this.currentTodoIndex].name;
+                const currentToDoDescription = currentProject.storedItems[this.currentTodoIndex].description;
+                this.$descriptionSection.innerText = currentToDoDescription;    
         }
-
-        if (this.currentTodoIndex !== null){
-            currentProject.storedItems.forEach((item, x) => {
-                const $descriptionElement = document.createElement("p");
-                const currentDescriptionValue = this.$descriptionInput.value;
-
-                $descriptionElement.innerText = currentDescriptionValue;
-                const a = currentProject.storedItems[this.currentTodoIndex].description.push(currentDescriptionValue);
-                // const currentTodo = currentProject.storedItems[this.currentTodoIndex];
-                // currentTodo.description = currentDescriptionValue;
-
-                $descriptionElement.addEventListener("click", () => {
-                    this.render();
-                })
-
-
-                this.$descriptionInput.value = "";
-    
-                this.$descriptionSection.append($descriptionElement);
-
-            });
-
-
-            }
-
-            // currentProject.storedItems[this.currentTodoIndex].forEach((item, x) => {
-            //     const $descriptionElement = document.createElement("p");
-            //     $descriptionElement.innerText = item.description;
-
-            //     $descriptionElement.addEventListener("click", () => {
-            //         this.descriptionIndex = x;
-            //         console.log(x)
-            //         this.render();
-            //     })
-            // })
-    }
+   }
 
 }
 
@@ -173,7 +148,7 @@ class Project{
 class Todo{
     constructor(name){
         this.name = name;
-        this.description = [];
+        this.description = "";
     }
 }
 
@@ -181,20 +156,3 @@ class Todo{
 
 
 const todoList = new TodoList();
-
-
-// render(todoItem){
-//     const currentTodoIndex = todoItem.length - 1;
-//     const currentTodo = todoItem[currentTodoIndex];
-//     this.$todoItemName.innerText = currentTodo.name;
-
-// createDescription(j){
-//     this.$descriptionInput.value = "";
-//     this.currentTodoIndex = j;
-//     const descriptionInput = this.$descriptionInput.value;
-//     const currentProject = this.projects[this.currentProjectIndex];
-//     const currentTodo = currentProject.storedItems[this.currentTodoIndex];
-//     console.log(currentTodo);
-//     currentTodo.description.push(descriptionInput);
-//     console.log(currentTodo.description)
-// }

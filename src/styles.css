@@ -187,3 +187,7 @@ li {
     grid-template-columns: 75% 25%;
     grid-template-rows: 100px;
 }
+
+#description {
+    padding: 20px 10px;
+}
